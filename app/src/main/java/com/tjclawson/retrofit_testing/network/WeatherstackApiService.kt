@@ -16,29 +16,31 @@ interface WeatherstackApiService {
         const val BASE_URL = "http://api.weatherstack.com/"
         const val API_KEY = BuildConfig.weatherstack_api_key
 
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(Interceptor {
-                val url = it.request()
-                    .url()
-                    .newBuilder()
-                    .addQueryParameter("access_key", API_KEY)
-                    .build()
+        operator fun invoke() : WeatherstackApiService {
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(Interceptor {
+                    val url = it.request()
+                        .url()
+                        .newBuilder()
+                        .addQueryParameter("access_key", API_KEY)
+                        .build()
 
-                val request = it.request()
-                    .newBuilder()
-                    .url(url)
-                    .build()
+                    val request = it.request()
+                        .newBuilder()
+                        .url(url)
+                        .build()
 
-                return@Interceptor it.proceed(request)
-            })
-            .build()
+                    return@Interceptor it.proceed(request)
+                })
+                .build()
 
-        val retrofit = Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(WeatherstackApiService::class.java)
+            return Retrofit.Builder()
+                .client(okHttpClient)
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(WeatherstackApiService::class.java)
+        }
     }
 
     @GET("current")
