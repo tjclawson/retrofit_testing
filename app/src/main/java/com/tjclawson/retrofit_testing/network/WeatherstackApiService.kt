@@ -2,10 +2,12 @@ package com.tjclawson.retrofit_testing.network
 
 import com.tjclawson.retrofit_testing.BuildConfig
 import com.tjclawson.retrofit_testing.data.CurrentWeatherResponse
+import io.reactivex.Flowable
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -38,6 +40,7 @@ interface WeatherstackApiService {
                 .client(okHttpClient)
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
                 .create(WeatherstackApiService::class.java)
         }
@@ -45,4 +48,7 @@ interface WeatherstackApiService {
 
     @GET("current")
     suspend fun getCurrentWeather(@Query("query") location: String): CurrentWeatherResponse
+
+    @GET("current")
+    fun getCurrentWeatherRx(@Query("query") location: String): Flowable<CurrentWeatherResponse>
 }
