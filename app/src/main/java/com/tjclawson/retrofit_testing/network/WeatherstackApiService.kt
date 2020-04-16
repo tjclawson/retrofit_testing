@@ -44,5 +44,5 @@ interface WeatherstackApiService {
     }
 
     @GET("current")
-    fun getCurrentWeather(@Query("query") location: String): Deferred<CurrentWeatherResponse>
+    suspend fun getCurrentWeather(@Query("query") location: String): CurrentWeatherResponse
 }
