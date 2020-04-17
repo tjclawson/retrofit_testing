@@ -3,6 +3,7 @@ package com.tjclawson.retrofit_testing.network
 import com.tjclawson.retrofit_testing.BuildConfig
 import com.tjclawson.retrofit_testing.data.CurrentWeatherResponse
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -50,5 +51,5 @@ interface WeatherstackApiService {
     suspend fun getCurrentWeather(@Query("query") location: String): CurrentWeatherResponse
 
     @GET("current")
-    fun getCurrentWeatherRx(@Query("query") location: String): Flowable<CurrentWeatherResponse>
+    fun getCurrentWeatherRx(@Query("query") location: String): Observable<CurrentWeatherResponse>
 }
