@@ -14,13 +14,27 @@
         android:autofillHints="Location" />
 
     <TextView
-        android:id="@+id/text_view"
+        android:id="@+id/text_view_coroutine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/et_location"/>
 
+    <TextView
+        android:id="@+id/text_view_rx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_coroutine"/>
+
     <Button
-        android:id="@+id/button_get_weather"
+        android:id="@+id/button_get_weather_coroutine"
+        android:layout_width="match_parent"
+        android:text="Coroutine"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_view_rx"/>
+
+    <Button
+        android:id="@+id/button_get_weather_rx"
+        android:text="RX"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"/>

@@ -4,8 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tjclawson.retrofit_testing.data.CurrentWeatherResponse
 import com.tjclawson.retrofit_testing.network.WeatherstackApiService
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class WeatherViewModel : ViewModel() {
 
@@ -17,4 +19,6 @@ class WeatherViewModel : ViewModel() {
             currentWeather.postValue(weatherstackApiService.getCurrentWeather(location))
         }
     }
+
+    fun getWeatherRxJava(location: String) = weatherstackApiService.getCurrentWeatherRx(location)
 }
